@@ -10,6 +10,7 @@ export interface PhotoSrc {
   tiny: string;
 }
 
+//Code for Photo API
 export interface Photo {
   id: number;
   width: number;
@@ -24,6 +25,7 @@ export interface Photo {
   alt: string | null; // The alt text
 }
 
+//Code for Pagination type
 export interface PexelsResponse {
   page: number;
   per_page: number;

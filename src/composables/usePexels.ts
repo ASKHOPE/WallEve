@@ -4,6 +4,8 @@ import type { PexelsResponse, Photo } from '../types/pexels';
 const PEXELS_API_KEY = import.meta.env.VITE_PEXELS_API_KEY;
 const BASE_URL = 'https://api.pexels.com/v1';
 
+
+//Fall back photo properties
 const fallbackPhotos: Photo[] = [
   {
     id: 0,
@@ -34,6 +36,7 @@ const categories = ['Nature', 'Technology', 'Food', 'Animals'];
 // Select a random category on initialization
 const getRandomCategory = () => categories[Math.floor(Math.random() * categories.length)];
 
+// Image Query API
 export function usePexels(queryParam: string = getRandomCategory(), perPageParam: number = 9) {
   const query = ref<string>(queryParam);
   const photos = ref<Photo[]>([]);

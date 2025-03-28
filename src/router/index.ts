@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue';
 // import PageView from '../views/PageView.vue';
 import AboutView from '../views/AboutView.vue';
 
-
+// Routes to other pages from main/home page
 const routes = [
   {
     path: '/',
@@ -16,8 +16,6 @@ const routes = [
     name: 'About',
     component: AboutView
   }
-  // Catch-all route for 404 - Optional
-  // { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFoundView }
 ];
 
 const router = createRouter({

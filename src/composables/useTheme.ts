@@ -3,7 +3,7 @@ import { ref, onMounted, onUnmounted, watch } from 'vue';
 type Theme = 'light' | 'dark';
 
 const theme = ref<Theme>(getInitialTheme());
-
+//Gets and stores the theme in local storage to maintain the interoperablity and state preservation of the theme.
 function getInitialTheme(): Theme {
   if (typeof window !== 'undefined') {
     const storedTheme = localStorage.getItem('theme') as Theme | null;
@@ -15,6 +15,7 @@ function getInitialTheme(): Theme {
   return 'light'; // Default for SSR or non-browser environments
 }
 
+//Eventlistener to check for the system theme 
 function setupSystemThemeListener() {
   if (typeof window !== 'undefined') {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -30,6 +31,7 @@ function setupSystemThemeListener() {
   return () => {}; // No-op cleanup function
 }
 
+// Theme Logic to look for changes and update the theme
 export function useTheme() {
   let removeListener: () => void;
 
@@ -49,6 +51,8 @@ export function useTheme() {
       document.documentElement.className = newTheme;
     }
   });
+
+  //Toggles the theme
 
   const toggleTheme = () => {
     theme.value = theme.value === 'light' ? 'dark' : 'light';
