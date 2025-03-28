@@ -37,7 +37,9 @@ const {
           <source :srcset="image.src.landscape" media="(min-width: 768px)" />
           
           <!-- Fallback image -->
-          <img :src="image.src.medium" :alt="image.alt" class="fallback-image" />
+          <!-- <img :src="image.src.medium" :alt="image.alt" class="fallback-image" /> -->
+          <img :src="image.src.medium" :alt="image.alt || 'Fallback image'" class="fallback-image" />
+
         </picture>
         <p class="text-sm text-center mt-2">📷 {{ image.photographer }}</p>
       </div>

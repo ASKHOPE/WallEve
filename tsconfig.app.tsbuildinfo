@@ -1,0 +1,1 @@
+{"root":["./src/main.ts","./src/vite-env.d.ts","./src/composables/usepexels.ts","./src/composables/usetheme.ts","./src/router/index.ts","./src/types/pexels.d.ts","./src/app.vue","./src/components/footer.vue","./src/components/imagecard.vue","./src/components/navbar.vue","./src/views/aboutview.vue","./src/views/homeview.vue","./src/views/pageview.vue"],"version":"5.8.2"}

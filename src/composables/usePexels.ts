@@ -34,9 +34,8 @@ const categories = ['Nature', 'Technology', 'Food', 'Animals'];
 // Select a random category on initialization
 const getRandomCategory = () => categories[Math.floor(Math.random() * categories.length)];
 
-
-export function usePexels() {
-  const query = ref<string>(getRandomCategory()); 
+export function usePexels(queryParam: string = getRandomCategory(), perPageParam: number = 9) {
+  const query = ref<string>(queryParam);
   const photos = ref<Photo[]>([]);
   const isLoading = ref<boolean>(false);
   const error = ref<string | null>(null);
@@ -45,11 +44,11 @@ export function usePexels() {
   const totalResults = ref<number>(0);
   const nextPageUrl = ref<string | null>(null);
   const prevPageUrl = ref<string | null>(null);
-  const perPage = ref<number>(window.innerWidth < 768 ? 6 : 9); 
+  const perPage = ref<number>(perPageParam); 
   const orientation = ref<string>(window.innerWidth < 768 ? 'portrait' : 'landscape');
 
   const updateScreenSettings = () => {
-    perPage.value = window.innerWidth < 768 ? 6 : 9;
+    perPage.value = window.innerWidth < 768 ? 6 : perPageParam;
     orientation.value = window.innerWidth < 768 ? 'portrait' : 'landscape';
     fetchPhotos(currentPage.value); // Re-fetch photos when screen size changes
   };
@@ -72,7 +71,6 @@ export function usePexels() {
     try {
       const url = `${BASE_URL}/search?query=${encodeURIComponent(query.value)}&per_page=${perPage.value}&page=${page}&orientation=${orientation.value}`;
 
-      // const url = `${BASE_URL}/search?query=${encodeURIComponent(query)}&per_page=${perPage.value}&page=${page}&orientation=${orientation.value}`;
       const response = await fetch(url, {
         headers: {
           Authorization: PEXELS_API_KEY
@@ -91,7 +89,7 @@ export function usePexels() {
         nextPageUrl.value = data.next_page || null;
         prevPageUrl.value = data.prev_page || null;
       } else {
-        console.warn(`No photos found for query "${query}" with orientation "${orientation.value}". Using fallback images.`);
+        console.warn(`No photos found for query "${query.value}" with orientation "${orientation.value}". Using fallback images.`);
         photos.value = fallbackPhotos;
         isUsingFallback.value = true;
       }
@@ -129,6 +127,7 @@ export function usePexels() {
   });
 
   return {
+    query,
     photos,
     isLoading,
     error,
