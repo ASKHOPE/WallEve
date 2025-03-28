@@ -70,7 +70,9 @@ export function usePexels() {
     }
 
     try {
-      const url = `${BASE_URL}/search?query=${encodeURIComponent(query)}&per_page=${perPage.value}&page=${page}&orientation=${orientation.value}`;
+      const url = `${BASE_URL}/search?query=${encodeURIComponent(query.value)}&per_page=${perPage.value}&page=${page}&orientation=${orientation.value}`;
+
+      // const url = `${BASE_URL}/search?query=${encodeURIComponent(query)}&per_page=${perPage.value}&page=${page}&orientation=${orientation.value}`;
       const response = await fetch(url, {
         headers: {
           Authorization: PEXELS_API_KEY
